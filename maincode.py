@@ -7,7 +7,6 @@ while True:
         flag = True
         print('Cadastre-se agora!')
         while flag:
-            
             email = input('digite seu email: ')
             if ' ' in email: # caso ele tenha colocado espaço no email
                 print('email inválido1')
