@@ -65,8 +65,6 @@ while flag:
             else:
                 print('A confirmação falhou, suas senhas foram diferentes')
 
-
-        
     else:
         print('Digite apenas "s" ou "n"')
         continue
