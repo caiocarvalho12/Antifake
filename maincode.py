@@ -1,5 +1,4 @@
 print('\t\t\t\t\t\tAntifake')
-flag = True
 while flag:
     cadastro = input('Já tem uma conta? (s)im (n)ão: ').strip().lower()
     if cadastro.startswith('s'):
@@ -14,7 +13,6 @@ while flag:
             # Verifica se o nome contém apenas letras e espaços
             if all(c.isalpha() or c.isspace() for c in nome):
                 if len(nome.split()) >= 2:  # Verifica se tem pelo menos nome e sobrenome
-                    print(f"Nome válido: {nome}")
                     break
                 else:
                     print("Nome inválido, digite seu nome completo.")
@@ -50,7 +48,7 @@ while flag:
                 continue
 
             dia, mes, ano = partes
-            if not (dia.isdigit and mes.isdigit and ano.isdigit):
+            if not (dia.isdigit() and mes.isdigit() and ano.isdigit()):
                 print('A data de nascimento deve conter apenas numeros e "/" para divisão.')
                 continue
             if len(dia) != 2 or len(mes) != 2 or len(ano) != 4:
