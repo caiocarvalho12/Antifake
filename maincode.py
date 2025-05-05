@@ -11,7 +11,7 @@ while flag:
         while True:
             nome = input('Digite seu nome completo: ').strip()
             if len(nome.split()) < 2:
-                print('Digite seu nome completo')
+                print('Por favor, digite seu nome completo!')
                 continue
             else:
                 break
@@ -19,16 +19,16 @@ while flag:
         while True:
             email = input('digite seu email: ').strip()
             if ' ' in email: # caso ele tenha colocado espaço no email
-                print('email inválido, seu email tem espaços')
+                print('email inválido, seu email tem espaços.')
                 continue
             if '@' not in email: # caso ele não tenha colocado o @ no email
-                print('email inválido, seu email não tem "@"')
+                print('email inválido, seu email não tem "@".')
                 continue
             if not ('gmail.com' in email or 'ufrpe.br' in email):  # caso ele não tenha colocado nem gmail.com nem ufrpe.br
-                print('email inválido falta o domínio gmail.com ou ufrpe.br')
+                print('email inválido, use os domínios "gmail.com" ou "ufrpe.br".')
                 continue
             if len(email.split('@')[0]) < 3: # Se seu email tiver menos de 3 caracteres (antes do @), é inválido
-                print('email inválido5')
+                print('email inválido, tente novamente!')
                 continue     
             else:
                 break
@@ -36,20 +36,20 @@ while flag:
         while True:
             data_de_nascimento = input('Digite a sua data de nascimento:(dd/mm/aaaa) ').strip()
             if '/' not in data_de_nascimento:
-                print('formato inválido, use dd/mm/aaaa')
+                print('formato inválido, use dd/mm/aaaa.')
                 continue
 
             partes = data_de_nascimento.split('/')
             if len(partes) != 3:
-                print('formato inválido, use dd/mm/aaaa')
+                print('formato inválido, use dd/mm/aaaa.')
                 continue
 
             dia, mes, ano = partes
             if not (dia.isdigit and mes.isdigit and ano.isdigit):
-                print('A data de nascimento deve conter apenas numeros e "/" para divisão')
+                print('A data de nascimento deve conter apenas numeros e "/" para divisão.')
                 continue
             if len(dia) != 2 or len(mes) != 2 or len(ano) != 4:
-                print('É necessário 2 caracteres no dia, 2 no mês e 4 no ano')
+                print('É necessário dois caracteres no dia, dois caracteres no mês e quatro no ano')
                 continue
             else:
                 break
@@ -57,13 +57,13 @@ while flag:
         while True:
             senha = input('Digite sua senha (min 8 caracteres): ')
             if len(senha) < 8:
-                print('caracteres insuficientes, minimo 8')
+                print('caracteres insuficientes, deve ter no mínimo 8.')
                 continue
             confirmação_senha = input('confirme sua senha: ')
             if confirmação_senha == senha:
                 break
             else:
-                print('A confirmação falhou, suas senhas foram diferentes')
+                print('A confirmação falhou, suas senhas foram diferentes!')
 
     else:
         print('Digite apenas "s" ou "n"')
