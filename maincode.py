@@ -9,12 +9,17 @@ while flag:
         print('Cadastre-se agora!')
         
         while True:
-            nome = input('Digite seu nome completo: ').strip()
-            if len(nome.split()) < 2:
-                print('Por favor, digite seu nome completo!')
-                continue
+            nome = input("Digite seu nome completo: ").strip()
+
+            # Verifica se o nome contém apenas letras e espaços
+            if all(c.isalpha() or c.isspace() for c in nome):
+                if len(nome.split()) >= 2:  # Verifica se tem pelo menos nome e sobrenome
+                    print(f"Nome válido: {nome}")
+                    break
+                else:
+                    print("Nome inválido, digite seu nome completo.")
             else:
-                break
+                print("Nome inválido! Use apenas letras e espaços.")
         
         while True:
             email = input('digite seu email: ').strip()
