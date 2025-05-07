@@ -5,7 +5,6 @@ while flag:
     if cadastro.startswith('s'):
         ...
     elif cadastro.startswith('n'): # Se o usuário ainda não se cadastrou
-        flag = True
         print('Cadastre-se agora!')
         
         while True:
@@ -19,7 +18,8 @@ while flag:
                     print("Nome inválido, digite seu nome completo.")
             else:
                 print("Nome inválido! Use apenas letras e espaços.")
-        
+
+        # Cadastro do email do usuário        
         while True:
             email = input('digite seu email: ').strip()
             if ' ' in email: # caso ele tenha colocado espaço no email
@@ -36,7 +36,8 @@ while flag:
                 continue     
             else:
                 break
-        
+
+        # Cadastro da data de nascimento do usuário
         while True:
             data_de_nascimento = input('Digite a sua data de nascimento:(dd/mm/aaaa) ').strip()
             if '/' not in data_de_nascimento:
@@ -76,6 +77,7 @@ while flag:
             else:
                 break
 
+        # Cadastro da senha do usuário
         while True:
             senha = input('Digite sua senha (min 8 caracteres): ')
             if len(senha) < 8:
@@ -84,18 +86,12 @@ while flag:
             confirmação_senha = input('confirme sua senha: ')
 
             if confirmação_senha == senha:
-                if senha.isdigit():
-                    tentar_de_novo = input('senha fraca, deseja refazêla? (s)im (n)ão: ').strip().lower()
-                    if tentar_de_novo.startswith('s'):
-                        continue
-                    else:
-                        break
-
-                if senha.isalpha():
+                if senha.isalpha() or senha.isdigit():
                     tentar_de_novo = input('senha fraca, deseja refazêla? (s)im (n)ão: ')
                     if tentar_de_novo.startswith('s'):
                         continue
                     else:
+                        flag = False
                         break
                 flag = False
                 break
