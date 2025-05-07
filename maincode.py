@@ -68,18 +68,21 @@ while flag:
 
         # Senha
         while True:
-            senha = input('Digite sua senha (mínimo 8 caracteres): ')
+            senha = input('Digite sua senha (min 8 caracteres): ')
             if len(senha) < 8:
-                print('Senha muito curta.')
-            else:
-                confirmacao = input('Confirme sua senha: ')
-                if confirmacao == senha:
-                    break
+                print('caracteres insuficientes, deve ter no mínimo 8.')
+                continue
+            confirmação_senha = input('confirme sua senha: ')
+
+            if confirmação_senha == senha:
+                if senha.isalpha() or senha.isdigit():
+                    tentar_de_novo = input('senha fraca, deseja refazêla? (s)im (n)ão: ')
+                    if tentar_de_novo.startswith('s'):
+                        continue
                 else:
-                    print('As senhas não coincidem.')
-
-        print("Cadastro realizado com sucesso!")
-        flag = False  # encerra o loop
-
+                    flag = False
+                    break
+            flag = False
+            break
     else:
-        print('Digite apenas "s" ou "n".')
+        print('A confirmação falhou, suas senhas foram diferentes!')
