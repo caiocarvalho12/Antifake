@@ -1,4 +1,5 @@
 print('\t\t\t\t\t\tAntifake')
+flag = True
 while flag:
     cadastro = input('Já tem uma conta? (s)im (n)ão: ').strip().lower()
     if cadastro.startswith('s'):
@@ -46,7 +47,6 @@ while flag:
             if len(partes) != 3:
                 print('formato inválido, use dd/mm/aaaa.')
                 continue
-
             dia, mes, ano = partes
             if not (dia.isdigit() and mes.isdigit() and ano.isdigit()):
                 print('A data de nascimento deve conter apenas numeros e "/" para divisão.')
@@ -54,6 +54,25 @@ while flag:
             if len(dia) != 2 or len(mes) != 2 or len(ano) != 4:
                 print('É necessário dois caracteres no dia, dois caracteres no mês e quatro no ano')
                 continue
+            
+            dia_int = int(dia)
+            mes_int = int(mes)
+            ano_int = int(ano)
+            
+            if not 1 <= mes_int <= 12:
+                print('(erro 0) data de nascimento inválida')
+                continue
+            if mes_int % 2 == 1 and not 1 <= dia_int <= 31: # mês ímpar, dia até 31 
+                print('(erro 1) data de nascimento inválida')
+                continue
+            if mes_int == 2 and not 1 <= dia_int <= 29:
+                print('(erro 2) data de nascimento inválida')
+                continue
+            if mes_int % 2 == 0 and mes_int != 2 and not 1 <= dia_int <= 30:
+                print('(erro 3) data de nascimento inválida')
+                continue
+            if not 1900 < ano_int <= 2025:
+                print('(erro 4) data de nascimento inválida')
             else:
                 break
 
@@ -63,10 +82,26 @@ while flag:
                 print('caracteres insuficientes, deve ter no mínimo 8.')
                 continue
             confirmação_senha = input('confirme sua senha: ')
+
             if confirmação_senha == senha:
+                if senha.isdigit():
+                    tentar_de_novo = input('senha fraca, deseja refazêla? (s)im (n)ão: ').strip().lower()
+                    if tentar_de_novo.startswith('s'):
+                        continue
+                    else:
+                        break
+
+                if senha.isalpha():
+                    tentar_de_novo = input('senha fraca, deseja refazêla? (s)im (n)ão: ')
+                    if tentar_de_novo.startswith('s'):
+                        continue
+                    else:
+                        break
+                flag = False
                 break
             else:
                 print('A confirmação falhou, suas senhas foram diferentes!')
+                
 
     else:
         print('Digite apenas "s" ou "n"')
