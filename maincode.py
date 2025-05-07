@@ -38,25 +38,38 @@ while flag:
                 break
         
         while True:
-            data_de_nascimento = input('Digite a sua data de nascimento:(dd/mm/aaaa) ').strip()
-            if '/' not in data_de_nascimento:
-                print('formato inválido, use dd/mm/aaaa.')
-                continue
+            try:
+                dia = int(input("Digite o dia de nascimento (1-31): "))
+                mes = int(input("Digite o mês de nascimento (1-12): "))
+                ano = int(input("Digite o ano de nascimento (a partir de 1900): "))
 
-            partes = data_de_nascimento.split('/')
-            if len(partes) != 3:
-                print('formato inválido, use dd/mm/aaaa.')
-                continue
+                if ano < 1900:
+                    print("Ano inválido. Digite um ano a partir de 1900.")
+                    continue
+                if mes < 1 or mes > 12:
+                    print("Mês inválido. Digite um número de 1 a 12.")
+                    continue
 
-            dia, mes, ano = partes
-            if not (dia.isdigit() and mes.isdigit() and ano.isdigit()):
-                print('A data de nascimento deve conter apenas numeros e "/" para divisão.')
-                continue
-            if len(dia) != 2 or len(mes) != 2 or len(ano) != 4:
-                print('É necessário dois caracteres no dia, dois caracteres no mês e quatro no ano')
-                continue
-            else:
+                # Verifica os dias válidos do mês considerando ano bissexto
+                if mes == 2:
+                    if (ano % 4 == 0 and (ano % 100 != 0 or ano % 400 == 0)):
+                        dias_do_mes = 29
+                    else:
+                        dias_do_mes = 28
+                elif mes in [4, 6, 9, 11]:
+                    dias_do_mes = 30
+                else:
+                    dias_do_mes = 31
+
+                if dia < 1 or dia > dias_do_mes:
+                    print(f"Dia inválido para o mês {mes}.")
+                    continue
+
+                print(f"Data válida: {dia:02}/{mes:02}/{ano}")
                 break
+
+            except ValueError:
+                print("Digite apenas números válidos para dia, mês e ano.")
 
         while True:
             senha = input('Digite sua senha (min 8 caracteres): ')
