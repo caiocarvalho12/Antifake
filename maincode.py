@@ -1,4 +1,5 @@
 print('\t\t\t\t\t\tAntifake')
+flag = True
 while flag:
     cadastro = input('Já tem uma conta? (s)im (n)ão: ').strip().lower()
     if cadastro.startswith('s'):
