@@ -5,27 +5,25 @@ while flag:
     cadastro = input('Já tem uma conta? (s)im (n)ão: ').strip().lower()
     
     if cadastro.startswith('s'):
-        print("Login em desenvolvimento...")
+        print("Login em desenvolvimento...")  # Substitua por lógica de login real depois
         flag = False
-
+    
     elif cadastro.startswith('n'):
         print('Cadastre-se agora!')
 
         # Nome
-        nome_valido = False
-        while not nome_valido:
+        while True:
             nome = input("Digite seu nome completo: ").strip()
             if all(c.isalpha() or c.isspace() for c in nome):
                 if len(nome.split()) >= 2:
-                    nome_valido = True
+                    break
                 else:
                     print("Nome inválido, digite seu nome completo.")
             else:
                 print("Nome inválido! Use apenas letras e espaços.")
 
         # Email
-        email_valido = False
-        while not email_valido:
+        while True:
             email = input('Digite seu email: ').strip()
             if ' ' in email:
                 print('Email inválido, contém espaços.')
@@ -36,7 +34,7 @@ while flag:
             elif len(email.split('@')[0]) < 3:
                 print('Email inválido, parte antes do "@" muito curta.')
             else:
-                email_valido = True
+                break
 
         # Data de nascimento
         def eh_bissexto(ano):
@@ -50,40 +48,38 @@ while flag:
             else:
                 return 31
 
-        data_valida = False
-        while not data_valida:
+        while True:
             try:
-                dia = int(input("Digite o seu dia de nascimento: "))
-                mes = int(input("Digite o seu mês de nascimento: "))
-                ano = int(input("Digite o seu ano de nascimento: "))
+                dia = int(input("Digite o dia de nascimento (1-31): "))
+                mes = int(input("Digite o mês de nascimento (1-12): "))
+                ano = int(input("Digite o ano de nascimento (a partir de 1900): "))
 
                 if ano < 1900:
-                    print("Ano inválido.")
+                    print("Ano inválido. Deve ser a partir de 1900.")
                 elif mes < 1 or mes > 12:
                     print("Mês inválido.")
                 elif dia < 1 or dia > dias_no_mes(mes, ano):
-                    print("Dia inválido.")
+                    print("Dia inválido para esse mês.")
                 else:
                     print(f"Data válida: {dia:02}/{mes:02}/{ano}")
-                    data_valida = True
+                    break
             except ValueError:
                 print("Digite apenas números válidos.")
 
         # Senha
-        senha_valida = False
-        while not senha_valida:
+        while True:
             senha = input('Digite sua senha (mínimo 8 caracteres): ')
-            if len(senha) >= 8:
+            if len(senha) < 8:
+                print('Senha muito curta.')
+            else:
                 confirmacao = input('Confirme sua senha: ')
                 if confirmacao == senha:
-                    senha_valida = True
+                    break
                 else:
                     print('As senhas não coincidem.')
-            else:
-                print('Senha muito curta.')
 
         print("Cadastro realizado com sucesso!")
-        flag = False
+        flag = False  # encerra o loop
 
     else:
         print('Digite apenas "s" ou "n".')
