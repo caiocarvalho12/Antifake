@@ -32,50 +32,69 @@ while flag:
                 print('email inválido, use os domínios "gmail.com" ou "ufrpe.br".')
                 continue
             if len(email.split('@')[0]) < 3: # Se seu email tiver menos de 3 caracteres (antes do @), é inválido
-                print('email inválido, tente novamente!')
-                continue     
+                print('email inválido, seu email deve haver mais caracteres!')
+                continue
+            if 'gmail.com' in email and len(email.split('@')[1]) != 9: #Se o email tiver mais ou menos que 9 caracteres depois do '@' e for gmail.com, é inválido.   
+                print('email inválido, domínio está incorreto')
+                continue
+            if 'ufrpe.br' in email and len(email.split('@')[1]) != 8: #Se o email tiver mais ou menos que 8 caracteres depois do '@' e for ufrpe.br, é inválido.   
+                print('email inválido, domínio está incorreto')
+                continue
             else:
                 break
         
         while True:
-            try:
-                dia = int(input("Digite o dia de nascimento (1-31): "))
-                mes = int(input("Digite o mês de nascimento (1-12): "))
-                ano = int(input("Digite o ano de nascimento (a partir de 1900): "))
+            data_de_nascimento = input('Digite sua data de nascimento: (dd/mm/aaaa): ')
+            partes = data_de_nascimento.split('/')
+            if len(partes) != 3:
+                print('formato inválido, use dd/mm/aaaa.')
+                continue
+            dia, mes, ano = partes
+            if not (dia.isdigit() and mes.isdigit() and ano.isdigit()):
+                print('A data de nascimento deve conter apenas numeros e "/" para divisão.')
+                continue
+            if len(dia) != 2 or len(mes) != 2 or len(ano) != 4:
+                print('É necessário dois caracteres no dia, dois caracteres no mês e quatro no ano')
+                continue
+            
+            dia_int = int(dia)
+            mes_int = int(mes)
+            ano_int = int(ano)
 
-                if ano < 1900:
-                    print("Ano inválido. Digite um ano a partir de 1900.")
-                    continue
-                if mes < 1 or mes > 12:
-                    print("Mês inválido. Digite um número de 1 a 12.")
-                    continue
-
-                # Verifica os dias válidos do mês considerando ano bissexto
-                if mes == 2:
-                    if (ano % 4 == 0 and (ano % 100 != 0 or ano % 400 == 0)):
-                        dias_do_mes = 29
-                    else:
-                        dias_do_mes = 28
-                elif mes in [4, 6, 9, 11]:
-                    dias_do_mes = 30
+            if not 1 <= mes_int <= 12:
+                print('(erro 0) data de nascimento inválida')
+                continue
+            if mes_int % 2 == 1 and not 1 <= dia_int <= 31: # mês ímpar, dia até 31 
+                print('(erro 1) data de nascimento inválida')
+                continue
+            if mes_int == 2:
+                if (ano_int % 4 == 0 and (ano_int % 100 != 0 or ano_int % 400 == 0)):
+                    if not 0 < dia_int <= 29:
+                        print('(erro2.1) data de nascimento inválida')
+                        continue
                 else:
-                    dias_do_mes = 31
-
-                if dia < 1 or dia > dias_do_mes:
-                    print(f"Dia inválido para o mês {mes}.")
-                    continue
-
-                print(f"Data válida: {dia:02}/{mes:02}/{ano}")
+                    if not 0 < dia_int <= 28:
+                        print('(erro2.2) data de nascimento inválida')
+                        continue
+            if mes_int % 2 == 0 and mes_int != 2 and not 1 <= dia_int <= 30:
+                print('(erro 3) data de nascimento inválida')
+                continue
+            if not 1900 < ano_int <= 2025:
+                print('(erro 4) data de nascimento inválida')
+                continue
+            else:
                 break
-
-            except ValueError:
-                print("Digite apenas números válidos para dia, mês e ano.")
 
         while True:
             senha = input('Digite sua senha (min 8 caracteres): ')
             if len(senha) < 8:
                 print('caracteres insuficientes, deve ter no mínimo 8.')
                 continue
+            if senha.isalpha() or senha.isdigit():
+                senha_fraca = input('senha fraca, gostaria de tentar de novo para deixá-la mais forte?' \
+                                    '(s)im ou (n)ão): ').lower().strip()
+                if senha_fraca.startswith('s'):
+                    continue
             confirmação_senha = input('confirme sua senha: ')
             if confirmação_senha == senha:
                 break
