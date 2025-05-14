@@ -60,15 +60,26 @@ while flag:
             mes_int = int(mes)
             ano_int = int(ano)
             
+            if mes_int == 2:
+                    if (ano_int % 4 == 0 and (ano_int % 100 != 0 or ano_int % 400 == 0)):
+                        mes_int = 29
+                    else:
+                        mes_int = 28
             if not 1 <= mes_int <= 12:
                 print('(erro 0) data de nascimento inválida')
                 continue
             if mes_int % 2 == 1 and not 1 <= dia_int <= 31: # mês ímpar, dia até 31 
                 print('(erro 1) data de nascimento inválida')
                 continue
-            if mes_int == 2 and not 1 <= dia_int <= 29:
-                print('(erro 2) data de nascimento inválida')
-                continue
+            if mes_int == 2:
+                if (ano_int % 4 == 0 and (ano_int % 100 != 0 or ano_int % 400 == 0)):
+                    if 0 > mes_int > 29:
+                        print('(erro2.1) data de nascimento inválida')
+                        continue
+                else:
+                    if 0 > mes_int > 28:
+                        print('(erro2.2) data de nascimento inválida')
+                        continue
             if mes_int % 2 == 0 and mes_int != 2 and not 1 <= dia_int <= 30:
                 print('(erro 3) data de nascimento inválida')
                 continue
