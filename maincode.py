@@ -8,7 +8,7 @@ while flag:
         flag = True
         print('Cadastre-se agora!')
         
-        def cadastrar_nome():
+        def cadastrar_nome(): # Cadastro do nome do usuário
             while True:
                 nome = input("Digite seu nome completo: ").strip()
                 # Verifica se o nome contém apenas letras e espaços
@@ -20,7 +20,7 @@ while flag:
                 else:
                     print("Nome inválido! Use apenas letras e espaços.")
         
-        def cadastrar_email(): 
+        def cadastrar_email(): # Cadastro do email do usuário
             while True:
                 email = input('digite seu email: ').strip()
                 if ' ' in email: # caso ele tenha colocado espaço no email
@@ -87,7 +87,7 @@ while flag:
                 else:
                     return data_de_nascimento
 
-        def cadastrar_senha():
+        def cadastrar_senha(): # Cadastro da senha do usuário
             while True:
                 senha = input('Digite sua senha (min 8 caracteres): ')
                 if len(senha) < 8:
