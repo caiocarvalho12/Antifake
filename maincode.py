@@ -11,11 +11,10 @@ while flag:
         def cadastrar_nome():
             while True:
                 nome = input("Digite seu nome completo: ").strip()
-
                 # Verifica se o nome contém apenas letras e espaços
                 if all(c.isalpha() or c.isspace() for c in nome):
                     if len(nome.split()) >= 2:  # Verifica se tem pelo menos nome e sobrenome
-                        break
+                        return nome    
                     else:
                         print("Nome inválido, digite seu nome completo.")
                 else:
@@ -43,7 +42,8 @@ while flag:
                     print('email inválido, domínio está incorreto')
                     continue
                 else:
-                    break
+                    return email
+                
         def cadastrar_data():
             while True:
                 data_de_nascimento = input('Digite sua data de nascimento: (dd/mm/aaaa): ')
@@ -85,7 +85,7 @@ while flag:
                     print('(erro 4) data de nascimento inválida')
                     continue
                 else:
-                    break
+                    return data_de_nascimento
 
         def cadastrar_senha():
             while True:
@@ -100,7 +100,7 @@ while flag:
                         continue
                 confirmação_senha = input('confirme sua senha: ')
                 if confirmação_senha == senha:
-                    break
+                    return senha
                 else:
                     print('A confirmação falhou, suas senhas foram diferentes!')
 
