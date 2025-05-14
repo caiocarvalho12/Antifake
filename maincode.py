@@ -32,8 +32,12 @@ while flag:
                 print('email inválido, use os domínios "gmail.com" ou "ufrpe.br".')
                 continue
             if len(email.split('@')[0]) < 3: # Se seu email tiver menos de 3 caracteres (antes do @), é inválido
-                print('email inválido, tente novamente!')
-                continue     
+                print('email inválido, seu email deve haver mais caracteres!')
+                continue
+            if 'gmail.com' in email and len(email.split('@')[1]) != 9: #Se o email tiver mais ou menos que 9 caracteres depois do '@' e for gmail.com, é inválido.   
+                print('email inválido, domínio está incorreto')
+            if 'ufrpe.br' in email and len(email.split('@')[1]) != 8: #Se o email tiver mais ou menos que 8 caracteres depois do '@' e for ufrpe.br, é inválido.   
+                print('email inválido, domínio está incorreto')
             else:
                 break
 
@@ -59,12 +63,7 @@ while flag:
             dia_int = int(dia)
             mes_int = int(mes)
             ano_int = int(ano)
-            
-            if mes_int == 2:
-                    if (ano_int % 4 == 0 and (ano_int % 100 != 0 or ano_int % 400 == 0)):
-                        mes_int = 29
-                    else:
-                        mes_int = 28
+
             if not 1 <= mes_int <= 12:
                 print('(erro 0) data de nascimento inválida')
                 continue
@@ -73,11 +72,11 @@ while flag:
                 continue
             if mes_int == 2:
                 if (ano_int % 4 == 0 and (ano_int % 100 != 0 or ano_int % 400 == 0)):
-                    if 0 > mes_int > 29:
+                    if 0 > dia_int > 29:
                         print('(erro2.1) data de nascimento inválida')
                         continue
                 else:
-                    if 0 > mes_int > 28:
+                    if 0 > dia_int > 28:
                         print('(erro2.2) data de nascimento inválida')
                         continue
             if mes_int % 2 == 0 and mes_int != 2 and not 1 <= dia_int <= 30:
@@ -85,6 +84,7 @@ while flag:
                 continue
             if not 1900 < ano_int <= 2025:
                 print('(erro 4) data de nascimento inválida')
+                continue
             else:
                 break
 
