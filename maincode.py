@@ -1,109 +1,172 @@
-print('\t\t\t\t\t\tAntifake')
-flag = True
-while flag:
-    cadastro = input('Já tem uma conta? (s)im (n)ão: ').strip().lower()
-    if cadastro.startswith('s'):
-        ...
-    elif cadastro.startswith('n'): # Se o usuário ainda não se cadastrou
-        flag = True
-        print('Cadastre-se agora!')
-        
-        def cadastrar_nome(): # Cadastro do nome do usuário
-            while True:
-                nome = input("Digite seu nome completo: ").strip()
-                # Verifica se o nome contém apenas letras e espaços
-                if all(c.isalpha() or c.isspace() for c in nome):
-                    if len(nome.split()) >= 2:  # Verifica se tem pelo menos nome e sobrenome
-                        return nome    
-                    else:
-                        print("Nome inválido, digite seu nome completo.")
-                else:
-                    print("Nome inválido! Use apenas letras e espaços.")
-        
-        def cadastrar_email(): # Cadastro do email do usuário
-            while True:
-                email = input('digite seu email: ').strip()
-                if ' ' in email: # caso ele tenha colocado espaço no email
-                    print('email inválido, seu email tem espaços.')
-                    continue
-                if '@' not in email: # caso ele não tenha colocado o @ no email
-                    print('email inválido, seu email não tem "@".')
-                    continue
-                if not ('gmail.com' in email or 'ufrpe.br' in email):  # caso ele não tenha colocado nem gmail.com nem ufrpe.br
-                    print('email inválido, use os domínios "gmail.com" ou "ufrpe.br".')
-                    continue
-                if len(email.split('@')[0]) < 3: # Se seu email tiver menos de 3 caracteres (antes do @), é inválido
-                    print('email inválido, seu email deve haver mais caracteres!')
-                    continue
-                if 'gmail.com' in email and len(email.split('@')[1]) != 9: #Se o email tiver mais ou menos que 9 caracteres depois do '@' e for gmail.com, é inválido.   
-                    print('email inválido, domínio está incorreto')
-                    continue
-                if 'ufrpe.br' in email and len(email.split('@')[1]) != 8: #Se o email tiver mais ou menos que 8 caracteres depois do '@' e for ufrpe.br, é inválido.   
-                    print('email inválido, domínio está incorreto')
-                    continue
-                else:
-                    return email
-                
-        def cadastrar_data():
-            while True:
-                data_de_nascimento = input('Digite sua data de nascimento: (dd/mm/aaaa): ')
-                partes = data_de_nascimento.split('/')
-                if len(partes) != 3:
-                    print('formato inválido, use dd/mm/aaaa.')
-                    continue
-                dia, mes, ano = partes
-                if not (dia.isdigit() and mes.isdigit() and ano.isdigit()):
-                    print('A data de nascimento deve conter apenas numeros e "/" para divisão.')
-                    continue
-                if len(dia) != 2 or len(mes) != 2 or len(ano) != 4:
-                    print('É necessário dois caracteres no dia, dois caracteres no mês e quatro no ano')
-                    continue
-                
-                dia_int = int(dia)
-                mes_int = int(mes)
-                ano_int = int(ano)
+import json
+import os
 
-                if not 1 <= mes_int <= 12:
-                    print('(erro 0) data de nascimento inválida')
-                    continue
-                if mes_int % 2 == 1 and not 1 <= dia_int <= 31: # mês ímpar, dia até 31 
-                    print('(erro 1) data de nascimento inválida')
-                    continue
-                if mes_int == 2:
-                    if (ano_int % 4 == 0 and (ano_int % 100 != 0 or ano_int % 400 == 0)):
-                        if not 0 < dia_int <= 29:
-                            print('(erro2.1) data de nascimento inválida')
-                            continue
-                    else:
-                        if not 0 < dia_int <= 28:
-                            print('(erro2.2) data de nascimento inválida')
-                            continue
-                if mes_int % 2 == 0 and mes_int != 2 and not 1 <= dia_int <= 30:
-                    print('(erro 3) data de nascimento inválida')
-                    continue
-                if not 1900 < ano_int <= 2025:
-                    print('(erro 4) data de nascimento inválida')
-                    continue
-                else:
-                    return data_de_nascimento
+ARQUIVO_USUARIOS = 'usuarios.json'
 
-        def cadastrar_senha(): # Cadastro da senha do usuário
-            while True:
-                senha = input('Digite sua senha (min 8 caracteres): ')
-                if len(senha) < 8:
-                    print('caracteres insuficientes, deve ter no mínimo 8.')
+def carregar_usuarios():
+    if os.path.exists(ARQUIVO_USUARIOS):
+        with open(ARQUIVO_USUARIOS, 'r', encoding='utf-8') as arquivo:
+            return json.load(arquivo)
+    return {}
+
+def salvar_usuarios(usuarios):
+    with open(ARQUIVO_USUARIOS, 'w', encoding='utf-8') as arquivo:
+        json.dump(usuarios, arquivo, indent=4, ensure_ascii=False)
+
+def cadastrar_nome():
+    while True:
+        nome = input("Digite seu nome completo: ").strip()
+        if all(c.isalpha() or c.isspace() for c in nome):
+            if len(nome.split()) >= 2:
+                return nome
+            else:
+                print("Nome inválido, digite seu nome completo.")
+        else:
+            print("Nome inválido! Use apenas letras e espaços.")
+
+def cadastrar_data():
+    while True:
+        data = input('Digite sua data de nascimento (dd/mm/aaaa): ')
+        partes = data.split('/')
+        if len(partes) != 3:
+            print('Formato inválido, use dd/mm/aaaa.')
+            continue
+        dia, mes, ano = partes
+        if not (dia.isdigit() and mes.isdigit() and ano.isdigit()):
+            print('Use apenas números e "/" para dividir.')
+            continue
+        dia, mes, ano = int(dia), int(mes), int(ano)
+        if not 1 <= mes <= 12 or not 1900 < ano <= 2025:
+            print('Data de nascimento inválida.')
+            continue
+        if mes == 2:
+            if (ano % 4 == 0 and (ano % 100 != 0 or ano % 400 == 0)):
+                if not 1 <= dia <= 29:
+                    print('Dia inválido para fevereiro em ano bissexto.')
                     continue
-                if senha.isalpha() or senha.isdigit():
-                    senha_fraca = input('senha fraca, gostaria de tentar de novo para deixá-la mais forte?' \
-                                        '(s)im ou (n)ão): ').lower().strip()
-                    if senha_fraca.startswith('s'):
-                        continue
-                confirmação_senha = input('confirme sua senha: ')
-                if confirmação_senha == senha:
-                    return senha
-                else:
-                    print('A confirmação falhou, suas senhas foram diferentes!')
+            else:
+                if not 1 <= dia <= 28:
+                    print('Dia inválido para fevereiro.')
+                    continue
+        elif mes in [4, 6, 9, 11] and not 1 <= dia <= 30:
+            print('Esse mês tem no máximo 30 dias.')
+            continue
+        elif not 1 <= dia <= 31:
+            print('Dia inválido.')
+            continue
+        return data
+
+def cadastrar_email(usuarios):
+    while True:
+        email = input('Digite seu email: ').strip()
+        if ' ' in email:
+            print('Email inválido: contém espaços.')
+            continue
+        if '@' not in email:
+            print('Email inválido: falta "@"')
+            continue
+        if not ('gmail.com' in email or 'ufrpe.br' in email):
+            print('Use domínios "gmail.com" ou "ufrpe.br".')
+            continue
+        if len(email.split('@')[0]) < 3:
+            print('Email inválido: parte antes do @ muito curta.')
+            continue
+        if email in usuarios:
+            print('Esse email já está cadastrado.')
+            continue
+        return email
+
+def cadastrar_senha():
+    while True:
+        senha = input('Digite sua senha (mín. 8 caracteres): ')
+        if len(senha) < 8:
+            print('Senha muito curta.')
+            continue
+        if senha.isalpha() or senha.isdigit():
+            tentar = input('Senha fraca. Quer tentar outra? (s/n): ').strip().lower()
+            if tentar.startswith('s'):
+                continue
+        confirmacao = input('Confirme sua senha: ')
+        if senha == confirmacao:
+            return senha
+        else:
+            print('Confirmação incorreta.')
+
+print('\n' + '='*30)
+print('\tBem-vindo ao Antifake')
+print('='*30)
+
+usuarios = carregar_usuarios()
+
+while True:
+    escolha = input('\nVocê já tem uma conta? (s)im / (n)ão / (sair): ').strip().lower()
+
+    if escolha.startswith('s'):
+        email = input('Digite seu email: ')
+        senha = input('Digite sua senha: ')
+        if email in usuarios and usuarios[email]['senha'] == senha:
+            print(f'\nBem-vindo de volta, {usuarios[email]["nome"]}!')
+        else:
+            print('Email ou senha incorretos.')
+            continue
+
+    elif escolha.startswith('n'):
+        print('\nCadastre-se agora!')
+        nome = cadastrar_nome()
+        data_nascimento = cadastrar_data()
+        email = cadastrar_email(usuarios)
+        senha = cadastrar_senha()
+
+        usuarios[email] = {
+            'nome': nome,
+            'data_nascimento': data_nascimento,
+            'senha': senha
+        }
+        salvar_usuarios(usuarios)
+        print('Cadastro realizado com sucesso!')
+
+    elif escolha.startswith('sair'):
+        print('Encerrando o programa...')
+        break
 
     else:
-        print('Digite apenas "s" ou "n"')
+        print('Digite apenas "s", "n" ou "sair".')
         continue
+
+    while True:
+        opcao = input('\nEscolha:\n'
+                      '(1) Ver dados\n'
+                      '(2) Editar dados\n'
+                      '(3) Deletar conta\n'
+                      '(4) Ir para questionário\n'
+                      '(5) Ver tutorial\n'
+                      '(6) Ver feedback\n'
+                      '(0) Sair do menu\n> ').strip()
+
+        if opcao == '1':
+            print(json.dumps(usuarios[email], indent=4, ensure_ascii=False))
+
+        elif opcao == '2':
+            print('\n--- Editar dados ---')
+            novo_nome = cadastrar_nome()
+            nova_data = cadastrar_data()
+            nova_senha = cadastrar_senha()
+            usuarios[email]['nome'] = novo_nome
+            usuarios[email]['data_nascimento'] = nova_data
+            usuarios[email]['senha'] = nova_senha
+            salvar_usuarios(usuarios)
+            print('Dados atualizados!')
+
+        elif opcao == '3':
+            confirmar = input('Tem certeza que deseja deletar sua conta? (s/n): ').strip().lower()
+            if confirmar == 's':
+                del usuarios[email]
+                salvar_usuarios(usuarios)
+                print('Conta deletada.')
+                break
+
+        elif opcao == '0':
+            print('Voltando ao menu principal...')
+            break
+        else:
+            print('Função ainda não implementada.')
