@@ -92,6 +92,39 @@ def cadastrar_senha():
         else:
             print('Confirmação incorreta.')
 
+def cadastrar_tipo():
+    while True:
+        tipo_usuario = input('Você é aluno(1) ou professor(2)? ').strip()
+        if tipo_usuario not in ['1', '2', 'caio.samuel123']:
+            print('usuário inválido, digite apenas "1" ou "2".')
+        else:
+            return tipo_usuario
+        
+def editar_dados(email):
+    print('\n--- Editar dados ---')
+    novo_nome = cadastrar_nome()
+    nova_data = cadastrar_data()
+    nova_senha = cadastrar_senha()
+    usuarios[email]['nome'] = novo_nome
+    usuarios[email]['data_nascimento'] = nova_data
+    usuarios[email]['senha'] = nova_senha
+    salvar_usuarios(usuarios)
+    print('Dados atualizados!')
+
+def ver_dados(email):
+    print(json.dumps(usuarios[email], indent=4, ensure_ascii=False))
+
+def deletar_conta(email):
+    confirmar = input('Tem certeza que deseja deletar sua conta? (s/n): ').strip().lower()
+    if confirmar == 's':
+        del usuarios[email]
+        salvar_usuarios(usuarios)
+        print('Conta deletada.')
+        return True
+    else:
+        print('Ação cancelada.')
+        return False
+
 print('\n' + '='*30)
 print('\tBem-vindo ao Antifake')
 print('='*30)
@@ -101,72 +134,122 @@ usuarios = carregar_usuarios()
 while True:
     escolha = input('\nVocê já tem uma conta? (s)im / (n)ão / (sair): ').strip().lower()
 
-    if escolha.startswith('s'):
+    if escolha == 'sair':
+        print('Encerrando o programa...')
+        break
+
+    elif escolha == 's':
         email = input('Digite seu email: ')
         senha = input('Digite sua senha: ')
         if email in usuarios and usuarios[email]['senha'] == senha:
-            print(f'\nBem-vindo de volta, {usuarios[email]["nome"]}!')
+            print(f'\nBem-vindo de volta, {usuarios[email]['nome']}!')
+            usuario_logado = email
+            break
         else:
             print('Email ou senha incorretos.')
             continue
 
-    elif escolha.startswith('n'):
+    elif escolha == 'n':
         print('\nCadastre-se agora!')
+        tipo_usuario = cadastrar_tipo()
         nome = cadastrar_nome()
         data_nascimento = cadastrar_data()
         email = cadastrar_email(usuarios)
         senha = cadastrar_senha()
-
-        usuarios[email] = {
-            'nome': nome,
-            'data_nascimento': data_nascimento,
-            'senha': senha
-        }
+    
+        if tipo_usuario == '2':
+            usuarios[email] = {
+                'nome': nome,
+                'data_nascimento': data_nascimento,
+                'senha': senha,
+                'tipo': tipo_usuario,
+                'alunos': []
+            }
+        elif tipo_usuario == '1':
+            usuarios[email] = {
+                'nome': nome,
+                'data_nascimento': data_nascimento,
+                'senha': senha,
+                'tipo': tipo_usuario
+            }
         salvar_usuarios(usuarios)
         print('Cadastro realizado com sucesso!')
-
-    elif escolha.startswith('sair'):
-        print('Encerrando o programa...')
+        usuario_logado = email
         break
 
     else:
         print('Digite apenas "s", "n" ou "sair".')
         continue
-
+    
+def menu_professor(email):
     while True:
         opcao = input('\nEscolha:\n'
-                      '(1) Ver dados\n'
-                      '(2) Editar dados\n'
-                      '(3) Deletar conta\n'
-                      '(4) Ir para questionário\n'
-                      '(5) Ver tutorial\n'
-                      '(6) Ver feedback\n'
-                      '(0) Sair do menu\n> ').strip()
-
+                    '(1) Ver dados\n'
+                    '(2) Editar dados\n'
+                    '(3) Deletar conta\n'
+                    '(4) adicionar alunos\n'
+                    '(5) Ver desempenho dos alunos\n'
+                    '(0) Sair do menu\n> ').strip()
+                        
         if opcao == '1':
-            print(json.dumps(usuarios[email], indent=4, ensure_ascii=False))
+            ver_dados(email)
 
         elif opcao == '2':
-            print('\n--- Editar dados ---')
-            novo_nome = cadastrar_nome()
-            nova_data = cadastrar_data()
-            nova_senha = cadastrar_senha()
-            usuarios[email]['nome'] = novo_nome
-            usuarios[email]['data_nascimento'] = nova_data
-            usuarios[email]['senha'] = nova_senha
-            salvar_usuarios(usuarios)
-            print('Dados atualizados!')
+            editar_dados(email)
 
         elif opcao == '3':
-            confirmar = input('Tem certeza que deseja deletar sua conta? (s/n): ').strip().lower()
-            if confirmar == 's':
-                del usuarios[email]
-                salvar_usuarios(usuarios)
-                print('Conta deletada.')
-                break
+            if deletar_conta(email):
+                return 
+
+        elif opcao == '4':
+            adicionar_email = input('digite o email do aluno: ')
+            if adicionar_email not in usuarios:
+                print('Esse email ainda não foi cadastrado')
+            elif usuarios[adicionar_email]['tipo'] != '1':
+                print('Este usuário não está cadastrado como aluno')
+            else:
+                if adicionar_email in usuarios[email]['alunos']:
+                    print('Aluno já está adicionado.')
+                else:
+                    usuarios[email]['alunos'].append(adicionar_email)
+                    salvar_usuarios(usuarios)
+                    print('Aluno adicionado com sucesso!')
+
+        elif opcao == '0':
+            print('Voltando ao menu principal...')
+            break
+
+        else:
+            print('Função ainda não implementada.')
+    
+def menu_aluno(email):
+    while True:
+        opcao = input('\nEscolha:\n'
+                    '(1) Ver dados\n'
+                    '(2) Editar dados\n'
+                    '(3) Deletar conta\n'
+                    '(4) Ir para questionário\n'
+                    '(5) Ver tutorial\n'
+                    '(6) Ver feedback\n'
+                    '(0) Sair do menu\n> ').strip()
+
+        if opcao == '1':
+            ver_dados(email)
+
+        elif opcao == '2':
+            editar_dados(email)
+
+        elif opcao == '3':
+            if deletar_conta(email):
+                return
 
         elif opcao == '0':
             print('Voltando ao menu principal...')
             break
         else:
             print('Função ainda não implementada.')
+
+if usuarios[usuario_logado]['tipo'] == '1':
+    menu_aluno(usuario_logado)
+elif usuarios[usuario_logado]['tipo'] == '2':
+    menu_professor(usuario_logado)
