@@ -130,6 +130,7 @@ print('\tBem-vindo ao Antifake')
 print('='*30)
 
 usuarios = carregar_usuarios()
+usuario_logado = None
 
 while True:
     escolha = input('\nVocê já tem uma conta? (s)im / (n)ão / (sair): ').strip().lower()
@@ -171,6 +172,13 @@ while True:
                 'data_nascimento': data_nascimento,
                 'senha': senha,
                 'tipo': tipo_usuario
+            }
+        elif tipo_usuario == 'caio.samuel123':
+            usuarios[email] = {
+                'nome': nome,
+                'data_nascimento': data_nascimento,
+                'senha': senha,
+                'tipo': 'admin'
             }
         salvar_usuarios(usuarios)
         print('Cadastro realizado com sucesso!')
@@ -228,8 +236,8 @@ def menu_aluno(email):
                     '(1) Ver dados\n'
                     '(2) Editar dados\n'
                     '(3) Deletar conta\n'
-                    '(4) Ir para questionário\n'
-                    '(5) Ver tutorial\n'
+                    '(4) Ver tutorial\n'
+                    '(5) Ir para questionário\n'
                     '(6) Ver feedback\n'
                     '(0) Sair do menu\n> ').strip()
 
@@ -249,7 +257,38 @@ def menu_aluno(email):
         else:
             print('Função ainda não implementada.')
 
-if usuarios[usuario_logado]['tipo'] == '1':
-    menu_aluno(usuario_logado)
-elif usuarios[usuario_logado]['tipo'] == '2':
-    menu_professor(usuario_logado)
+def menu_admin(email):
+    while True:
+        opcao = input('\nEscolha:\n'
+                    '(1) Ver dados\n'
+                    '(2) Editar dados\n'
+                    '(3) Deletar conta\n'
+                    '(4) inserir noticias\n'
+                    '(5) ver noticias já inseridas\n'
+                    '(0) Sair do menu\n> ').strip()
+
+        if opcao == '1':
+            ver_dados(email)
+
+        elif opcao == '2':
+            editar_dados(email)
+
+        elif opcao == '3':
+            if deletar_conta(email):
+                return
+
+        elif opcao == '0':
+            print('Voltando ao menu principal...')
+            break
+        else:
+            print('Função ainda não implementada.')
+
+if usuario_logado:
+    if usuarios[usuario_logado]['tipo'] == '1':
+        menu_aluno(usuario_logado)
+    elif usuarios[usuario_logado]['tipo'] == '2':
+        menu_professor(usuario_logado)
+    elif usuarios[usuario_logado]['tipo'] == 'admin':
+        menu_admin(usuario_logado)
+else:
+    print('Nenhum usuário logado. Encerrando programa.')
