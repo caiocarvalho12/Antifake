@@ -180,6 +180,7 @@ while True:
     else:
         print('Digite apenas "s", "n" ou "sair".')
         continue
+
     
 def menu_professor(email):
     while True:
@@ -214,7 +215,7 @@ def menu_professor(email):
                     usuarios[email]['alunos'].append(adicionar_email)
                     salvar_usuarios(usuarios)
                     print('Aluno adicionado com sucesso!')
-
+        
         elif opcao == '0':
             print('Voltando ao menu principal...')
             break
@@ -242,6 +243,28 @@ def menu_aluno(email):
         elif opcao == '3':
             if deletar_conta(email):
                 return
+            
+        elif opcao == '5':
+            print('Seja bem-vindo ao tutorial de como identificar uma fake news!')
+            carac = input('Iremos ver cinco características que fazem parte de uma fake news. Escolha uma: ')
+            
+            if carac == '1': 
+                print('- 1: Site incofiável: Verifique se esse site/portal é bem reconhecido pelo público e pela mídia. ')
+            elif carac == '2':
+                print('- 2: Título sensacionalista: Caso o título da notícia seja encandaloso e sensacionalista,' \
+                ' não saia divulgando com urgência, leia a notícia atentamente, verifique se passou no nosso teste e com isso, divulgue ou não.')
+            elif carac == '3':
+                print('- 3: Texto desconexo da realidade: Se você ver que o texto ataca diretamente alguém ou algum grupo,' \
+                ' provavelmente você está lidando com uma notícia falsa')
+            elif carac == '4': 
+                print('- 4: Data distante: Ao ver uma notícia com data distante, veja se a situação da época não era diferente da atual, ' \
+                'pois o mundo pode estar diferente.')
+            elif carac == '5':
+                print('- 5: Sem fontes: Veja se a notícia conta com alguma opinião de um especialista no assunto' \
+                'ou se tem algum dado real e de uma instituição oficial, tudo isso passa credibilidade.')
+            else:
+                print('Escolha uma opção disponível.')
+
 
         elif opcao == '0':
             print('Voltando ao menu principal...')
