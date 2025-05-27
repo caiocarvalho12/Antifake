@@ -275,6 +275,8 @@ def adicionar_aluno():
     adicionar_email = input('digite o email do aluno: ')
     if adicionar_email not in usuarios:
         print('Esse email ainda não foi cadastrado')
+    elif 'alunos' not in usuarios[email]:
+        usuarios[email]['alunos'] = []
     elif usuarios[adicionar_email]['tipo'] != '1':
         print('Este usuário não está cadastrado como aluno')
     else:
