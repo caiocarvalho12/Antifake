@@ -387,7 +387,6 @@ def menu_professor(email): #Função que mostra o menu direcionado ao professor,
     
 def menu_aluno(email): #Função que mostra o menu direcionado ao aluno, com as funcionalidade especificas dele
     while True:
-        clear()
         opcao = input('\nEscolha:\n'
                     '(1) Ver dados\n'
                     '(2) Editar dados\n'
