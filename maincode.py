@@ -108,6 +108,7 @@ def cadastrar_tipo(): # Há 3 tipos de usuários, aqui será especificado o tipo
             return tipo_usuario
         
 def editar_dados(email): # No menu do Antifake está essa opção, o usuário tem o direito de fazer a modificação de seus dados se quiser
+    clear()
     print('\n--- Editar dados ---')
     novo_nome = cadastrar_nome()
     nova_data = cadastrar_data()
@@ -117,11 +118,16 @@ def editar_dados(email): # No menu do Antifake está essa opção, o usuário te
     usuarios[email]['senha'] = nova_senha
     salvar_usuarios(usuarios)
     print('Dados atualizados!')
+    input('Digite enter para continuar')
 
 def ver_dados(email): # Opção do menu que mostra os dados do proprio usuário
+    clear()
     print(json.dumps(usuarios[email], indent=4, ensure_ascii=False))
-
+    input('Digite enter para continuar')
+    
 def deletar_conta(email): # No menu do antifake, também há a opção de deletar a própria conta 
+    clear()
+    ver_dados()
     confirmar = input('Tem certeza que deseja deletar sua conta? (s/n): ').strip().lower()
     if confirmar == 's':
         del usuarios[email]
