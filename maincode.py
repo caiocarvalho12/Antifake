@@ -145,6 +145,22 @@ def mostrar_noticia(noticia): # Função do tutorial, as partes da noticia foram
     print("\nAnálise:")
     print(noticia['criterio'])
 
+def executar_tutorial(): #Função que mostra o corpo do tutorial
+    clear()
+    print('\n' + '='*30)
+    print('\tTutorial Antifake')
+    print('='*30)
+    print('\nSeja bem vindo(a) ao tutorial do AntiFake!\n' 
+        'Aqui você irá aprender os principais critérios para a identificação de Fake News!')
+    input('Mas antes, vamos testar seu conhecimento atual. (Digite enter para continuar)')
+            
+    noticias_tutorial = [noticia1, noticia2, noticia3, noticia4, noticia5]
+    for noticia in noticias_tutorial:
+        mostrar_noticia(noticia)
+        input('Digite enter para continuar')
+        clear()
+    input('Tutorial concluído! Digite enter para voltar ao menu')
+
 # Notícias fictícias que serão mostradas como exemplo no tutorial:
 noticia1 = {
     "manchete": "Novo estudo prova que refrigerante natural cura ansiedade",
@@ -247,6 +263,21 @@ noticia5 = {
         "usa linguagem exagerada e não apresenta provas ou fontes verificáveis, é sinal de manipulação emocional."
     )
 }
+#Abaixo, todas as funções relacionadas ao docente:
+def adicionar_aluno():
+    clear()
+    adicionar_email = input('digite o email do aluno: ')
+    if adicionar_email not in usuarios:
+        print('Esse email ainda não foi cadastrado')
+    elif usuarios[adicionar_email]['tipo'] != '1':
+        print('Este usuário não está cadastrado como aluno')
+    else:
+        if adicionar_email in usuarios[email]['alunos']:
+            print('Aluno já está adicionado.')
+        else:
+            usuarios[email]['alunos'].append(adicionar_email)
+            salvar_usuarios(usuarios)
+            print('Aluno adicionado com sucesso!')
 
 #Início do programa de fato:
 print('\n' + '='*30)
@@ -338,19 +369,8 @@ def menu_professor(email): #Função que mostra o menu direcionado ao professor,
             if deletar_conta(email):
                 return 
 
-        elif opcao == '4':
-            adicionar_email = input('digite o email do aluno: ')
-            if adicionar_email not in usuarios:
-                print('Esse email ainda não foi cadastrado')
-            elif usuarios[adicionar_email]['tipo'] != '1':
-                print('Este usuário não está cadastrado como aluno')
-            else:
-                if adicionar_email in usuarios[email]['alunos']:
-                    print('Aluno já está adicionado.')
-                else:
-                    usuarios[email]['alunos'].append(adicionar_email)
-                    salvar_usuarios(usuarios)
-                    print('Aluno adicionado com sucesso!')
+        elif opcao == '4': # O docente pode adicionar o email de qualquer discente para ver o desempenho do mesmo
+            adicionar_aluno()
 
         elif opcao == '0':
             print('Voltando ao menu principal...')
@@ -382,20 +402,7 @@ def menu_aluno(email): #Função que mostra o menu direcionado ao aluno, com as 
                 return
         
         elif opcao == '4':
-            clear()
-            print('\n' + '='*30)
-            print('\tTutorial Antifake')
-            print('='*30)
-            print('\nSeja bem vindo(a) ao tutorial do AntiFake!\n' 
-                'Aqui você irá aprender os principais critérios para a identificação de Fake News!')
-            input('Mas antes, vamos testar seu conhecimento atual. (Digite enter para continuar)')
-            
-            noticias_tutorial = [noticia1, noticia2, noticia3, noticia4, noticia5]
-            for noticia in noticias_tutorial:
-                mostrar_noticia(noticia)
-                input('Digite enter para continuar')
-                clear()
-            input('Tutorial concluído! Digite enter para voltar ao menu')
+            executar_tutorial()
 
         elif opcao == '0':
             print('Voltando ao menu principal...')
@@ -429,7 +436,7 @@ def menu_admin(email): #Função que mostra o menu direcionado ao admin, com as 
         else:
             print('Função ainda não implementada.')
 
-if usuario_logado:
+if usuario_logado: # O menu irá variar de acordo com o usuário
     if usuarios[usuario_logado]['tipo'] == '1':
         menu_aluno(usuario_logado)
     elif usuarios[usuario_logado]['tipo'] == '2':
