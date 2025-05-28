@@ -127,7 +127,7 @@ def ver_dados(email): # Opção do menu que mostra os dados do proprio usuário
     
 def deletar_conta(email): # No menu do antifake, também há a opção de deletar a própria conta 
     clear()
-    ver_dados()
+    ver_dados(email)
     confirmar = input('Tem certeza que deseja deletar sua conta? (s/n): ').strip().lower()
     if confirmar == 's':
         del usuarios[email]
@@ -363,7 +363,7 @@ def menu_professor(email): #Função que mostra o menu direcionado ao professor,
                     '(1) Ver dados\n'
                     '(2) Editar dados\n'
                     '(3) Deletar conta\n'
-                    '(4) adicionar alunos\n'
+                    '(4) Adicionar alunos\n'
                     '(5) Ver desempenho dos alunos\n'
                     '(0) Sair do menu\n> ').strip()
                         
@@ -423,8 +423,8 @@ def menu_admin(email): #Função que mostra o menu direcionado ao admin, com as 
                     '(1) Ver dados\n'
                     '(2) Editar dados\n'
                     '(3) Deletar conta\n'
-                    '(4) inserir noticias\n'
-                    '(5) ver noticias já inseridas\n'
+                    '(4) Inserir noticias\n'
+                    '(5) Ver noticias já inseridas\n'
                     '(0) Sair do menu\n> ').strip()
 
         if opcao == '1':
