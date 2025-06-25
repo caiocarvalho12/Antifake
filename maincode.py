@@ -90,7 +90,7 @@ def cadastrar_senha(): # Cadastra a senha associada ao email do usuário.
             print('Senha muito curta.')
             continue
         if senha.isalpha() or senha.isdigit():
-            tentar = input('Senha fraca. Quer tentar outra? (s/n): ').strip().lower()
+            tentar = input('Senha fraca. Quer (tentar outra? s/n): ').strip().lower()
             if tentar.startswith('s'):
                 continue
         confirmacao = input('Confirme sua senha: ')

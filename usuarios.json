@@ -1,0 +1,23 @@
+{
+    "cacotcho@gmail.com": {
+        "nome": "Caio Cordeiro Gomes Carvalho",
+        "data_nascimento": "05/10/2006",
+        "senha": "sL139.16",
+        "tipo": "admin"
+    },
+    "aluno@gmail.com": {
+        "nome": "Aluno Hipotético",
+        "data_nascimento": "01/01/2001",
+        "senha": "senha123",
+        "tipo": "1"
+    },
+    "professor@gmail.com": {
+        "nome": "Professor Hipotético jr",
+        "data_nascimento": "01/01/2000",
+        "senha": "senha123",
+        "tipo": "2",
+        "alunos": [
+            "aluno@gmail.com"
+        ]
+    }
+}
