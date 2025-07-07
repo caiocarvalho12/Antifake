@@ -6,7 +6,7 @@
 
 O AntiFake é uma plataforma educacional desenvolvida para capacitar indivíduos de todas as idades a identificar e combater a crescente disseminação de desinformação online. Reconhecendo que a proliferação de "Fake News" é um problema social significativo e em constante evolução, nosso projeto visa fornecer ferramentas interativas e metodologias de treinamento para fomentar o pensamento crítico e transformar usuários em avaliadores conscientes da informação digital.
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 O projeto AntiFake inclui as seguintes funcionalidades principais (algumas em desenvolvimento, mas projetadas para serem integradas na versão final):
 
@@ -17,7 +17,7 @@ O projeto AntiFake inclui as seguintes funcionalidades principais (algumas em de
 * **Funcionalidades para Professores (Projetado):** Adição e gerenciamento de alunos, e (futuramente) visualização do desempenho dos alunos nos questionários.
 * **Funcionalidades para Administradores (Projetado):** Inserção e gerenciamento de notícias para o tutorial e questionários.
 
-## 🚀 Como Executar o Projeto
+## Como Executar o Projeto
 
 Para executar o AntiFake em sua máquina local, siga os passos abaixo:
 
@@ -29,10 +29,8 @@ Certifique-se de ter o Python 3.x instalado em seu sistema.
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
+    git clone [https://github.com/caiocarvalho/Antifake.git](https://github.com/caiocarvalho12/Antifake.git)
     ```
-    (Substitua `seu-usuario/seu-repositorio` pelo caminho real do seu repositório no GitHub)
-
 2.  **Navegue até o diretório do projeto:**
     ```bash
     cd nome-do-repositorio-antifake
@@ -46,7 +44,7 @@ Certifique-se de ter o Python 3.x instalado em seu sistema.
     ```
     O programa iniciará no terminal, onde você poderá criar uma conta, fazer login e explorar as funcionalidades.
 
-## 🏗️ Estrutura do Projeto (Em Desenvolvimento)
+## Estrutura do Projeto (Em Desenvolvimento)
 
 * `main.py`: O script principal que contém a lógica de execução do programa e as funções de gerenciamento de usuários, tutorial, etc.
 * `usuarios.json`: Arquivo JSON para persistência dos dados de usuário (nomes, emails, senhas, tipo de usuário).
@@ -74,8 +72,3 @@ Este projeto está em desenvolvimento contínuo. As futuras funcionalidades e ex
 * [Caio Cordeiro Gomes Carvalho] - [@caiocarvalho12](https://github.com/caiocarvalho12)
 * [Samuel Andrade Adelino da Silva] - [@samuelandradea](https://github.com/samuelandradea)
 
----
-
-Lembre-se de substituir os placeholders como `seu-usuario/seu-repositorio`, `nome-do-repositorio-antifake`, `SeuUsuarioGitHub`, `UsuarioGitHubDoAmigo` pelos valores corretos do seu projeto e perfil no GitHub.
-
-Este `README` deve dar uma excelente primeira impressão e fornecer todas as informações necessárias para quem quiser entender e executar seu projeto!
