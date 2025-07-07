@@ -71,8 +71,8 @@ Este projeto está em desenvolvimento contínuo. As futuras funcionalidades e ex
 
 ## 👥 Contribuintes
 
-* [Caio Cordeiro Gomes Carvalho] - [@caiocarvalho12](https://github.com/SeuUsuarioGitHub)
-* [Nome Completo do seu Amigo] - [@UsuarioGitHubDoAmigo](https://github.com/UsuarioGitHubDoAmigo)
+* [Caio Cordeiro Gomes Carvalho] - [@caiocarvalho12](https://github.com/caiocarvalho12)
+* [Samuel Andrade Adelino da Silva] - [@samuelandradea](https://github.com/samuelandradea)
 
 ---
 
