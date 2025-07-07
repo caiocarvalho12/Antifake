@@ -33,7 +33,7 @@ Certifique-se de ter o Python 3.x instalado em seu sistema.
     ```
 2.  **Navegue até o diretório do projeto:**
     ```bash
-    cd nome-do-repositorio-antifake
+    cd Antifake
     ```
 
 ### Execução
