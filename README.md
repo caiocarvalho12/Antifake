@@ -52,7 +52,7 @@ Certifique-se de ter o Python 3.x instalado em seu sistema.
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Python 3.x**
+* **Python 3.13.3**
 * **Bibliotecas Padrão do Python:** `json` (para manipulação de dados), `os` (para comandos de sistema, como `clear`).
 
 ## 🔮 Próximas Etapas e Propostas Futuras
