@@ -12,12 +12,31 @@
         "tipo": "1"
     },
     "professor@gmail.com": {
-        "nome": "Professor Hipotético jr",
+        "nome": "Professor Hipotético",
         "data_nascimento": "01/01/2000",
         "senha": "senha123",
         "tipo": "2",
         "alunos": [
             "aluno@gmail.com"
         ]
+    },
+    "samuel.aas.2005@gmail.com": {
+        "nome": "samuel andrade",
+        "data_nascimento": "13/12/2005",
+        "senha": "samuel13",
+        "tipo": "1"
+    },
+    "sam@gmail.com": {
+        "nome": "Samuel Andrade",
+        "data_nascimento": "13/12/2005",
+        "senha": "samuca13",
+        "tipo": "2",
+        "alunos": []
+    },
+    "abc@gmail.com": {
+        "nome": "samuel andrade",
+        "data_nascimento": "13/12/2005",
+        "senha": "asd12345",
+        "tipo": "admin"
     }
 }
