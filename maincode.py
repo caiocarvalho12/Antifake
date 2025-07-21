@@ -23,6 +23,8 @@ while True:
     aluno = Aluno()
     professor = Professor()
     admin = Admin()
+    url = []
+    noticias = {}
 
 
     while True: # Looping principal, se sair do menu antifake, vem pra este looping
@@ -102,6 +104,6 @@ while True:
         elif usuarios[usuario_logado]['tipo'] == '2':
             professor.menu_professor(usuario_logado, usuarios)
         elif usuarios[usuario_logado]['tipo'] == 'admin':
-            admin.menu_admin(usuario_logado)
+            admin.menu_admin(usuario_logado, usuarios, url, noticias)
     else:
         print('Nenhum usuário logado. Encerrando programa.')

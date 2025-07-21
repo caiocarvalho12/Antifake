@@ -1,17 +1,21 @@
 import os
+import time
 from usuario import Usuario
-from noticia import Noticia
+from tutorial import Tutorial
+from questionario import Questionario
 
 class Aluno(Usuario):
-    def __init__(self):
-        pass
+    def __init__(self, email, usuarios):
+        self.email = email
+        self.usuarios = usuarios
     
     def clear(self):
         os.system('cls' if os.name == 'nt' else 'clear')
     
     def menu_aluno(self, email, usuarios): #Função que mostra o menu direcionado ao aluno, com as funcionalidade especificas dele
         usuario = Usuario()
-        noticia = Noticia()
+        tutorial = Tutorial()
+        questionario = Questionario()
         while True:
             opcao = input('\nEscolha:\n'
                         '(1) Ver dados\n'
@@ -19,7 +23,6 @@ class Aluno(Usuario):
                         '(3) Deletar conta\n'
                         '(4) Ver tutorial\n'
                         '(5) Ir para questionário\n'
-                        '(6) Ver feedback\n'
                         '(0) Sair do menu\n> ').strip()
 
             if opcao == '1':
@@ -33,10 +36,16 @@ class Aluno(Usuario):
                     return
             
             elif opcao == '4':
-                noticia.executar_tutorial()
+                tutorial.executar_tutorial()
+
+            elif opcao == '5':
+                questionario.executar_questionario()
 
             elif opcao == '0':
-                print('Voltando ao menu principal...')
+                print('Voltando ao login...')
+                for hora in range(1,2):
+                    print('Carregando login...')
+                    time.sleep(2)
                 return
             else:
-                print('Função ainda não implementada.')
+                return opcao

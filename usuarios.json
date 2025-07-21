@@ -36,7 +36,7 @@
     "abc@gmail.com": {
         "nome": "samuel andrade",
         "data_nascimento": "13/12/2005",
-        "senha": "asd12345",
+        "senha": "senha123",
         "tipo": "admin"
     }
 }

@@ -1,7 +1,9 @@
 import os
+import time
 from usuario import Usuario
+from questionario import Questionario
 
-class Professor(Usuario):
+class Professor(Usuario, Questionario):
     def __init__(self):
         pass
     
@@ -28,6 +30,7 @@ class Professor(Usuario):
 
     def menu_professor(self, usuario_logado, usuarios): #Função que mostra o menu direcionado ao professor, com as funcionalidade especificas dele
         usuario = Usuario()
+        questionario = Questionario()
         while True:
             opcao = input('\nEscolha:\n'
                         '(1) Ver dados\n'
@@ -47,12 +50,17 @@ class Professor(Usuario):
                 if usuario.deletar_conta(usuario_logado, usuarios):
                     return 
 
-            elif opcao == '4': # O docente pode adicionar o email de qualquer discente para ver o desempenho do mesmo
+            elif opcao == '4':
                 self.adicionar_aluno(usuario_logado, usuarios)
 
-            elif opcao == '0':
-                print('Voltando ao menu principal...')
-                return
+            elif opcao == '5':
+                questionario.ver_feedbacks()
 
+            elif opcao == '0':
+                print('Voltando ao login...')
+                for hora in range(1,2):
+                    print('Carregando login...')
+                    time.sleep(2)
+                return
             else:
-                print('Função ainda não implementada.')
+                return opcao
