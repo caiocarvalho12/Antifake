@@ -1,6 +1,6 @@
 # AntiFake: Plataforma Educacional para o Combate à Desinformação
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?style=flat&logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.13.3-blue?style=flat&logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange?style=flat)
 ![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-green?style=flat) ## 📚 Descrição do Projeto
 
