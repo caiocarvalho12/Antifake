@@ -6,7 +6,7 @@ class Admin(Usuario):
     def __init__(self):
         pass
 
-    def menu_admin(self, email, usuarios, url, noticias): #Função que mostra o menu direcionado ao admin, com as funcionalidade especificas dele
+    def menu_admin(self, email, usuarios, noticias): #Função que mostra o menu direcionado ao admin, com as funcionalidade especificas dele
         usuario = Usuario()
         noticia = Noticia()
         while True:
@@ -28,7 +28,7 @@ class Admin(Usuario):
                 if usuario.deletar_conta(email, usuarios):
                     return
             elif opcao == '4':
-                noticia.inserir_noticias(noticias)
+                noticia.inserir_noticias(email, noticias)
 
             elif opcao == '5':
                 noticia.ver_noticias()

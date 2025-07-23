@@ -1,10 +1,10 @@
 {
-    "http://samuel.com": {
-        "fonte": "samuel",
-        "manchete": "sameul",
+    "http://abc.com": {
+        "fonte": "a",
+        "manchete": "a",
         "data": "11/11/2000",
-        "corpo": "samuel",
-        "veracidade": "verdadeira",
-        "criterio": null
+        "corpo": "a",
+        "veracidade": "falsa",
+        "criterio": "a"
     }
 }

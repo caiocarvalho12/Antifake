@@ -133,8 +133,10 @@ class Noticia:
                 veracidade = self.cadastrar_veracidade()   
                 if veracidade == 'falsa':
                     criterio = self.cadastrar_criterio()
-                else:
+                elif veracidade == 'verdadeira':
                     criterio = None
+                else:
+                    return veracidade
                 break
 
             noticias[url] = {

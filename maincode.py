@@ -104,6 +104,6 @@ while True:
         elif usuarios[usuario_logado]['tipo'] == '2':
             professor.menu_professor(usuario_logado, usuarios)
         elif usuarios[usuario_logado]['tipo'] == 'admin':
-            admin.menu_admin(usuario_logado, usuarios, url, noticias)
+            admin.menu_admin(usuario_logado, usuarios, noticias)
     else:
         print('Nenhum usuário logado. Encerrando programa.')
