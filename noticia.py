@@ -150,10 +150,17 @@ class Noticia:
             print('Notícia cadastrada com sucesso!')
             break
 
-    def ver_noticias(self, url, noticias):
+    def ver_noticias(self):
         self.clear()
-        if url in noticias:
-            print(json.dumps(noticias[url], indent=4, ensure_ascii=False))
+        noticias = self.carregar_noticias()
+        if not noticias:
+            print("Nenhuma notícia cadastrada ainda.")
         else:
-            print('Notícia não encontrada!')
-        input('Digite enter para continuar')
+            print("Todas as notícias cadastradas:\n")
+            for url, dados in noticias.items():
+                print(f"URL: {url}")
+                for chave, valor in dados.items():
+                    if valor is not None:
+                        print(f"  {chave.capitalize()}: {valor}")
+                print("-" * 40)
+        input("\nPressione ENTER para voltar ao menu.")

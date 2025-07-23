@@ -6,8 +6,8 @@
         "tipo": "admin"
     },
     "aluno@gmail.com": {
-        "nome": "Aluno Hipotético",
-        "data_nascimento": "01/01/2001",
+        "nome": "Aluno A",
+        "data_nascimento": "11/11/2000",
         "senha": "senha123",
         "tipo": "1"
     },

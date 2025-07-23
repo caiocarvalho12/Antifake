@@ -5,10 +5,8 @@ from tutorial import Tutorial
 from questionario import Questionario
 
 class Aluno(Usuario):
-    def __init__(self, email, usuarios):
-        self.email = email
-        self.usuarios = usuarios
-    
+    def __init__(self):
+        pass
     def clear(self):
         os.system('cls' if os.name == 'nt' else 'clear')
     

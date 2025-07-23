@@ -3,15 +3,9 @@ from usuario import Usuario
 from noticia import Noticia
 
 class Admin(Usuario):
-    def __init__(self, email, usuarios, url, noticias):
-        self.email = email
-        self.usuarios = usuarios
-        self.url = url
-        self.noticias = noticias
-    def inserir_noticias(self):
-        print('Função ainda não implementada.')
-    def ver_noticias(self):
-        print('Função ainda não implementada.')
+    def __init__(self):
+        pass
+
     def menu_admin(self, email, usuarios, url, noticias): #Função que mostra o menu direcionado ao admin, com as funcionalidade especificas dele
         usuario = Usuario()
         noticia = Noticia()
@@ -34,13 +28,14 @@ class Admin(Usuario):
                 if usuario.deletar_conta(email, usuarios):
                     return
             elif opcao == '4':
-                noticia.inserir_noticias(url, noticias)
+                noticia.inserir_noticias(noticias)
 
             elif opcao == '5':
-                noticia.ver_noticias(url, noticias)
+                noticia.ver_noticias()
                 
             elif opcao == '0':
                 print('Voltando a tela de login...')
+                self.clear()
                 for hora in range(1,2):
                     print('Carregando login...')
                     time.sleep(2)
